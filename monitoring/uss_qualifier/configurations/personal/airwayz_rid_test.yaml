@@ -4,7 +4,8 @@ v1:
     action:
       test_suite:
         # 1. Select the Test Suite
-        suite_type: suites.astm.utm.f3548_21
+        # suite_type: suites.astm.utm.f3548_21
+        suite_type: suites.personal.airwayz_quick_check
         resources:
           # Mapping resources required by the suite to your definitions below
           flight_planners: flight_planners
@@ -45,8 +46,9 @@ v1:
             flight_planners:
               - participant_id: my_service_under_test
                 # URL to point to your service
-                # v1_base_url: http://host.docker.internal:5000
-                v1_base_url: http://localhost:5000
+                v1_base_url: http://localhost:5000/interuss
+                # v1_base_url: http://localhost:5000
+                timeout_seconds: 30
 
         # Means by which to obtain the versions of participants' systems under test
         test_env_version_providers:
