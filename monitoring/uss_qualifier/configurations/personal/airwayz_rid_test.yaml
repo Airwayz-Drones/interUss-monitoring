@@ -28,15 +28,12 @@ v1:
         utm_auth:
           resource_type: resources.communications.AuthAdapterResource
           specification:
-            # environment_variable_containing_auth_spec: AUTH_SPEC
-            auth_spec: NoAuth(test_user)
+            environment_variable_containing_auth_spec: AIRWAYZ_AUTH_SPEC
             scopes_authorized:
               - interuss.flight_planning.direct_automated_test
               - interuss.flight_planning.plan
               - interuss.versioning.read_system_versions
               - utm.strategic_coordination
-              - utm.availability_arbitration
-              - utm.constraint_management
         # 3. Define Your Service (Flight Planner)
         flight_planners:
           resource_type: resources.flight_planning.FlightPlannersResource
