@@ -42,6 +42,19 @@ uv run main.py \
 
 echo "[INFO] Test execution completed with exit code: ${TEST_EXIT_CODE}"
 
+# Format the JSON report for readability
+if [ -f "${OUTPUT_DIR}/report.json" ]; then
+    echo "[INFO] Formatting JSON report for readability..."
+    cd ../../
+    python scripts/format-report.py "${OUTPUT_DIR}/report.json" || echo "[WARN] Failed to format report"
+    
+    # Generate interactive dashboard
+    echo "[INFO] Generating interactive dashboard..."
+    python scripts/generate-dashboard.py "${OUTPUT_DIR}/report.json" || echo "[WARN] Failed to generate dashboard"
+    
+    cd ./monitoring/uss_qualifier
+fi
+
 # Determine test result status
 if [ ${TEST_EXIT_CODE} -eq 0 ]; then
     STATUS=":white_check_mark: SUCCESS"
