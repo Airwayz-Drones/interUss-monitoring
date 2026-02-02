@@ -4,9 +4,10 @@
 set -e
 
 # Configuration from environment variables
-SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
-SLACK_BOT_TOKEN="xoxb-4835892069510-9152059209265-oVldazOzj3u0MrFm7RuabxGq"
-SLACK_CHANNEL_ID="C094R1ZCH9N"
+SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+SLACK_BOT_TOKEN="xoxb-4835892069510-10398990003490-NLWR5YMS6DsT33icejyT9KY7"
+SLACK_CHANNEL_ID="C0AC0F634EL"
+export AIRWAYZ_AUTH_SPEC='AirwayzAuthAdapter(http://localhost:5000/uss/v1/register,63512930-8d77-4a2d-b1ba-e97823b0c567,3667831940005888)'
 
 # SLACK_WEBHOOK_URL="${SLACK_WEBHOOK_URL:-}"
 # SLACK_BOT_TOKEN="${SLACK_BOT_TOKEN:-}"
@@ -40,6 +41,19 @@ uv run main.py \
     || TEST_EXIT_CODE=$?
 
 echo "[INFO] Test execution completed with exit code: ${TEST_EXIT_CODE}"
+
+# Format the JSON report for readability
+if [ -f "${OUTPUT_DIR}/report.json" ]; then
+    echo "[INFO] Formatting JSON report for readability..."
+    cd ../../
+    python scripts/format-report.py "${OUTPUT_DIR}/report.json" || echo "[WARN] Failed to format report"
+    
+    # Generate interactive dashboard
+    echo "[INFO] Generating interactive dashboard..."
+    python scripts/generate-dashboard.py "${OUTPUT_DIR}/report.json" || echo "[WARN] Failed to generate dashboard"
+    
+    cd ./monitoring/uss_qualifier
+fi
 
 # Determine test result status
 if [ ${TEST_EXIT_CODE} -eq 0 ]; then

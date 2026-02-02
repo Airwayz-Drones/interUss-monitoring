@@ -28,15 +28,12 @@ v1:
         utm_auth:
           resource_type: resources.communications.AuthAdapterResource
           specification:
-            # environment_variable_containing_auth_spec: AUTH_SPEC
-            auth_spec: NoAuth(test_user)
+            environment_variable_containing_auth_spec: AIRWAYZ_AUTH_SPEC
             scopes_authorized:
               - interuss.flight_planning.direct_automated_test
               - interuss.flight_planning.plan
               - interuss.versioning.read_system_versions
               - utm.strategic_coordination
-              - utm.availability_arbitration
-              - utm.constraint_management
         # 3. Define Your Service (Flight Planner)
         flight_planners:
           resource_type: resources.flight_planning.FlightPlannersResource
@@ -46,8 +43,8 @@ v1:
             flight_planners:
               - participant_id: my_service_under_test
                 # URL to point to your service
-                v1_base_url: http://localhost:5000/interuss
-                # v1_base_url: http://localhost:5000
+                # v1_base_url: https://dev.airwayz-utm.co/interuss
+                v1_base_url: http://localhost:5000
                 timeout_seconds: 30
 
         # Means by which to obtain the versions of participants' systems under test
@@ -56,7 +53,11 @@ v1:
           dependencies:
             auth_adapter: utm_auth
           specification:
-            instances: []
+            instances:
+              - participant_id: my_service_under_test
+                interuss:
+                  # base_url: https://dev.airwayz-utm.co/interuss
+                  base_url: http://localhost:5000
 
         # Means by which to obtain the versions of participants' production systems
         prod_env_version_providers:
@@ -64,7 +65,11 @@ v1:
           dependencies:
             auth_adapter: utm_auth
           specification:
-            instances: []
+            instances:
+              - participant_id: my_service_under_test
+                interuss:
+                  # base_url: https://dev.airwayz-utm.co/interuss
+                  base_url: http://localhost:5000
 
         # 4. Define the DSS (Decision Support Service)
         # You normally need a DSS to test against. You can use a local mock or a real one.

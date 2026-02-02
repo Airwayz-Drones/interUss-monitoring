@@ -19,6 +19,7 @@ version: "3"
 
 vars:
   INTERUSS_ADAPTER_URL: "http://localhost:5010"
+  AIRWAYZ_AUTH_SPEC: '{"adapter_type": "resources.communications.airwayz_auth.AirwayzAuthAdapter", "specification": {"register_url": "http://localhost:5000/uss/v1/register", "api_key": "63512930-8d77-4a2d-b1ba-e97823b0c567", "uss_id": "3667831940005888"}}'
 
 tasks:
   default:
@@ -58,4 +59,5 @@ tasks:
     dir: ../../
     cmds:
       - export INTERUSS_ADAPTER_URL={{.INTERUSS_ADAPTER_URL}}
+      - export AIRWAYZ_AUTH_SPEC={{.AIRWAYZ_AUTH_SPEC}}
       - PYTHONPATH=$(cd ../../ && pwd) AUTH_SPEC="NoAuth()" uv run main.py --config configurations.personal.airwayz_rid_test
