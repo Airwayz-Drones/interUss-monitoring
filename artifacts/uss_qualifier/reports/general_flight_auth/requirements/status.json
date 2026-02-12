@@ -1,0 +1,16 @@
+{
+  "test_run_information": {
+    "test_run_id": "daf90627fbf08b98d3aefa9b7d526be9dac98ce52ae35b2c72fc6f45337c6822",
+    "start_time": "2026-02-12 10:53:10 UTC",
+    "end_time": "2026-02-12 10:53:11 UTC",
+    "baseline": "b8bddd37160d25d86e5c6d02378610c093381ce4db527b582c41e2ce3cce34d2",
+    "environment": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "participant_verifications": {
+    "uss1": {
+      "status": "Pass",
+      "system_version": null
+    }
+  },
+  "artifact_configuration": "requirements"
+}
